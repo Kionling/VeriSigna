@@ -6,7 +6,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div className="max-w-2xl text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-          Welcome to <span className="text-blue-600">SignaFlow</span>
+          Welcome to <span className="text-green-600">VeriSigna</span>
         </h1>
         <p className="text-600 text-lg mb-8">
           Send, sign, and manage digital documents — securely and effortlessly.
@@ -14,13 +14,13 @@ export default function Home() {
         <div className="flex justify-center gap-4">
           <a
             href="/admin"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="px-6 py-3  bg-green-600 text-white rounded-lg hover:bg-green-500 transition"
           >
             Go to Admin Dashboard
           </a>
           <a
             href="/sign"
-            className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+            className="px-6 py-3 rounded-lg hover:bg-gray-100 hover:text-black transition"
           >
             Try Signing a Document
           </a>

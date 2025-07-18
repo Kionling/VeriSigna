@@ -11,7 +11,7 @@ export default function Navbar() {
     }`;
 
   return (
-    <nav className="w-full flex items-center justify-between px-6 py-4 text-lg">
+    <nav className="w-full flex items-center justify-between px-6 py-1 text-lg">
       <Link href="/" className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8 flex items-center">
         VeriSigna
       </Link>
