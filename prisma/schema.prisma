@@ -20,6 +20,7 @@ model User {
   password  String
   role      String   // "admin", "client", etc.
   createdAt DateTime @default(now())
+  documents Document[]
 }
 
 model Document {
