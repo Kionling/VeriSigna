@@ -21,3 +21,11 @@ model User {
   role      String   // "admin", "client", etc.
   createdAt DateTime @default(now())
 }
+
+model Document {
+  id        String   @id @default(uuid())
+  title     String
+  owner     User     @relation(fields: [ownerId], references: [id])
+  ownerId   String
+  createdAt DateTime @default(now())
+}
