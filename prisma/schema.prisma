@@ -1,32 +1,45 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgresql" // or "mysql" / "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  role      String   // "admin", "client", etc.
-  createdAt DateTime @default(now())
-  documents Document[]
+  id             String               @id @default(cuid())
+  name           String?
+  email          String?              @unique
+  emailVerified  DateTime?
+  image          String?
+  password       String?              // Only needed for credentials auth
+  role           String               @default("client") // "client" or "admin"
+  createdAt      DateTime             @default(now())
+  contracts      ContractSignature[]
 }
 
-model Document {
-  id        String   @id @default(uuid())
-  title     String
-  owner     User     @relation(fields: [ownerId], references: [id])
-  ownerId   String
-  createdAt DateTime @default(now())
+model ContractTemplate {
+  id         String               @id @default(cuid())
+  title      String
+  content    String               // Static contract body (Markdown or HTML)
+  createdAt  DateTime             @default(now())
+  signatures ContractSignature[]
+}
+
+model ContractSignature {
+  id            String               @id @default(cuid())
+  userId        String
+  templateId    String
+  signerName    String
+  agreedToTerms Boolean
+  signedAt      DateTime             @default(now())
+  box1Checked   Boolean              @default(false)
+  box2Checked   Boolean              @default(false)
+  signatureHash String?             // Optional: hash of signature data
+
+  user       User             @relation(fields: [userId], references: [id])
+  template   ContractTemplate @relation(fields: [templateId], references: [id])
+
+  @@unique([userId, templateId])     // Prevents signing the same contract twice
 }
